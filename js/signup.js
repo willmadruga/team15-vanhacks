@@ -10,6 +10,5 @@ angular.module('app.signUp', ['ngRoute'])
 }])
 
 .controller('SignUpCtrl', function() {
-		console.log('sign up controller.');
-	}
-);
+	console.log('sign up controller.');
+});
