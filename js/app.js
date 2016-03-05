@@ -1,31 +1,11 @@
-angular.module('website', ['ngRoute']).
-    config(function ($routeProvider) {
+angular.module('app', 
+    ['ngRoute', 
+     'app.signIn',
+     'app.signUp'])
+    .config(function ($routeProvider) {
         $routeProvider.
-            when('/signin', {templateUrl: 'partials/signin.html', controller: 'SignInCtrl'}).
-            when('/signup', {templateUrl: 'partials/signup.html', controller: 'SignUpCtrl'}).
             when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'}).
             otherwise({redirectTo: '/home'});
-    })
-    .controller('SignInCtrl', function ($scope, $location, StateService) {
-        $scope.title = 'About Page';
-        $scope.body = 'This is the about page body';
-
-        $scope.message = StateService.getMessage();
-
-        $scope.updateMessage = function (m) {
-            StateService.setMessage(m);
-        };        
-    })
-    .controller('SignUpCtrl', function ($scope, StateService, ExperimentsService) {
-        $scope.title = 'Experiments Page';
-        $scope.body = 'This is the about experiments body';
-
-        $scope.message = StateService.getMessage();
-        $scope.experiments = ExperimentsService.getExperiments();
-
-        $scope.updateMessage = function (m) {
-            StateService.setMessage(m);
-        };
     })
     .controller('HomeCtrl', function ($rootScope, $scope, StateService) {
 
