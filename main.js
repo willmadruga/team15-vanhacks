@@ -1,8 +1,9 @@
 /* global angular */
 angular
-	.module('KnackApp', [])	
-  .controller('MainController', ['$scope', '$http', function ($scope, $http) {
+	.module('KnackApp', ["firebase"])
+  .controller('MainController', ['$scope', function ($scope) {
+  	 var dbRef = new Firebase("https://knackio.firebaseio.com");
 
-    
+
   }
 ]);
