@@ -14,13 +14,7 @@ angular.module('website', ['ngRoute']).
 
         $scope.updateMessage = function (m) {
             StateService.setMessage(m);
-        };
-
-        $scope.signUp = function() {
-            alert('need to redirect to signup page');
-            console.log('need to redirect to signup page');
-            // $location.path("/signup");
-        }
+        };        
     })
     .controller('SignUpCtrl', function ($scope, StateService, ExperimentsService) {
         $scope.title = 'Experiments Page';
