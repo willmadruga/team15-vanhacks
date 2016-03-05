@@ -9,8 +9,9 @@ angular.module('app.signUp', ['ngRoute', 'firebase'])
   
 }])
 
+
 .controller('SignUpCtrl', function($scope) {
-		console.log("signup ctrl");
+		
 	
 var dbRef = new Firebase("https://knackio.firebaseio.com");
 
@@ -55,3 +56,4 @@ var dbRef = new Firebase("https://knackio.firebaseio.com");
         }
       }
   });
+

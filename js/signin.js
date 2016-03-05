@@ -10,6 +10,5 @@ angular.module('app.signIn', ['ngRoute'])
 }])
 
 .controller('SignInCtrl', function() {
-		console.log('sign in controller.');
-	}
-);
+	console.log('sign in controller.');
+});
