@@ -48,11 +48,11 @@
 					          <div class="col-sm-4" ng-show="badges[$index+0]">
 					          	 <div class="panel panel-default my_panel">
 						            <div class="panel-body">
-						              <img src="{{badges[$index+0].url}}" alt="" class="img-responsive center-block" />
+						              <img ng-src="{{badges[$index+0].url}}" alt="" class="img-responsive center-block" />
 						            </div>
 						            <div class="panel-footer">
 						            	
-						             	<input name="{{badges[$index+0].name}}" type="number" ng-model="badges[$index+0].quantity" class="form-control">
+						             	<input name="{{badges[$index+0].name}}" type="number" min="0" ng-model="badges[$index+0].quantity" class="form-control">
 						            
 						            </div>
 						          </div>		    
@@ -61,11 +61,11 @@
 					          <div class="col-sm-4" ng-show="badges[$index+1]">
 					          	 <div class="panel panel-default my_panel">
 						            <div class="panel-body">
-						              <img src="{{badges[$index+1].url}}" alt="" class="img-responsive center-block" />
+						              <img ng-src="{{badges[$index+1].url}}" alt="" class="img-responsive center-block" />
 						            </div>
 						            <div class="panel-footer">
 						            	
-						             	<input name="{{badges[$index+1].name}}" type="number" ng-model="badges[$index+1].quantity" class="form-control">
+						             	<input name="{{badges[$index+1].name}}" type="number" min="0" ng-model="badges[$index+1].quantity" class="form-control">
 						            
 						            </div>
 						          </div>		    
@@ -75,11 +75,11 @@
 					        <div class="col-sm-4" ng-show="badges[$index+2]">
 					          	 <div class="panel panel-default my_panel">
 						            <div class="panel-body">
-						              <img src="{{badges[$index+2].url}}" alt="" class="img-responsive center-block" />
+						              <img ng-src="{{badges[$index+2].url}}" alt="" class="img-responsive center-block" />
 						            </div>
 						            <div class="panel-footer">
 						            	
-						             	<input name="{{badges[$index+2].name}}" type="number" ng-model="badges[$index+2].quantity" class="form-control">
+						             	<input name="{{badges[$index+2].name}}" type="number" min="0" ng-model="badges[$index+2].quantity" class="form-control">
 						            
 						            </div>
 						          </div>		    
@@ -108,5 +108,101 @@
 		</form>
 	   
 	</div>
+
+	<!-- Lists of tasks -->
+
+
+	<div class="panel-group" id="accordion">
+	  <div class="panel panel-default" ng-repeat="task in tasks">
+	  	<div class="panel-heading">
+	    <a href="" ng-click="openTask($index)">
+	    <span class="label label-default label-pill pull-right">{{task.date}}</span>
+	    {{task.title}}
+	    </a>
+	    </div>
+	  
+	    <div class="panel-body" ng-show="tasks[$index].open">
+
+	    		<div class="row" ng-if="$parent.getCurrentUser() === 'Earner' ">
+	    			<div class="col-sm-2">
+	    			<button class="control-label btn btn-success" ng-click="$scope.apply($index)">APPLY</button>
+	    			</div>
+	    		</div>
+	    		<br/>
+			    <div class="row">
+			        <label class="control-label col-sm-2">Title: </label>
+			        <div class="col-sm-10">
+			        	{{task.title}}
+			    	</div>
+
+			    </div>
+
+			    <div class="row">
+					<label class="control-label col-sm-2">Description: </label>
+			        <div class="col-sm-10">
+			        	{{task.description}}
+			    	</div>
+			    </div>
+
+			    <div class="row">
+					<label class="control-label col-sm-2">Application Deadline: </label>
+			        <div class="col-sm-10">
+			        	{{task.date}}
+			    	</div>
+			    </div>
+
+			    <div class="row">
+					<label class="control-label col-sm-2">Earnable Badges: </label>
+			        <div class="col-sm-10">
+			        	<div ng-repeat="badge in task.badges">
+			        	
+					      <span ng-switch="" on="$index % 3">
+
+					        <div class="row" ng-switch-when="0">
+					          <div class="col-sm-4" ng-show="task.badges[$index+0]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{task.badges[$index+0].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						           
+						          </div>		    
+					          </div>
+
+					          <div class="col-sm-4" ng-show="task.badges[$index+1]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{task.badges[$index+1].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						           
+						          </div>		    
+					          </div>
+
+
+					        <div class="col-sm-4" ng-show="task.badges[$index+2]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{task.badges[$index+2].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						            
+						          </div>		    
+					          </div>
+
+					        </div>
+					      </span>
+			    		</div>
+			    	</div>
+
+			    </div>
+	    	
+	    </div>
+	  </div>
+	</div>
+	<!-- TEsting-->
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+
+
+
 
 </div>
