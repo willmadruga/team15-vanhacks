@@ -52,6 +52,11 @@
             </form>
           </li></ul>
           <ul class="nav navbar-nav navbar-right"><li>
+            <form class="form-signin" ng-hide="isLoggedIn()">
+              <a class="btn btn-primary btn-block" href="#/signup">Sign Up</a>
+            </form>
+          </li></ul>
+          <ul class="nav navbar-nav navbar-right"><li>
               <form class="form-signin" ng-show="isLoggedIn()">
                 <button class="btn btn-primary btn-block" ng-click="logoutUser()">
                 Sign out
