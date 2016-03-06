@@ -1,5 +1,5 @@
 <div class="container">
-
+<br />
 <h1>Available Tasks <a href="" ng-click="clickToAdd()" ng-disabled="canAdd != true"><i class="fa fa-plus-square text-right"></i></a></h1> 
 
 
@@ -115,7 +115,7 @@
 	<div class="panel-group" id="accordion">
 	  <div class="panel panel-default" ng-repeat="task in tasks">
 	  	<div class="panel-heading">
-	    <a href="" ng-click="openTask($index)">
+	    <a href="" ng-click="openTask($index, task)">
 	    <span class="label label-default label-pill pull-right">{{task.date}}</span>
 	    {{task.title}}
 	    </a>
@@ -125,7 +125,7 @@
 
 	    		<div class="row" ng-if="$parent.getCurrentUser() === 'Earner' ">
 	    			<div class="col-sm-2">
-	    			<button class="control-label btn btn-success" ng-click="$scope.apply($index)">APPLY</button>
+	    			<button class="control-label btn btn-success" ng-click="apply(task)">APPLY</button>
 	    			</div>
 	    		</div>
 	    		<br/>
@@ -192,6 +192,15 @@
 			    		</div>
 			    	</div>
 
+			    </div>
+
+			    <div class="row" ng-if="$parent.getCurrentUser() === 'Employer'">
+			    	<label class="control-label col-sm-2">Participants: </label>
+			    	<div class="col-sm-10">
+			    	<ul>
+			    		<li ng-repeat="participant in participants">{{participant.firstName}} {{participant.lastName}}</li>
+			    	</ul>
+			    	</div>
 			    </div>
 	    	
 	    </div>

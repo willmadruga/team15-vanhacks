@@ -12,12 +12,9 @@ angular.module('app',
             otherwise({redirectTo: '/home'});
     })
     .controller('MainCtrl', function($scope, $rootScope, $location) {
-        var dbRef = new Firebase("https://knackio.firebaseio.com"); 
-
-        $rootScope.getCurrentUser = function () {
-            // TODO
-            return 'Earner';
-        }
+        
+        var baseUrl = "https://knackio.firebaseio.com/";
+        var dbRef = new Firebase(baseUrl);        
 
         $rootScope.canSeeClasses = function() {
             return $rootScope.getCurrentUser() === 'Earner' || $rootScope.getCurrentUser() === 'Agency';

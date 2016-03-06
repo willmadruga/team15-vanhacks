@@ -137,26 +137,65 @@ angular.module('app.tasks', ['ngRoute', 'firebase'])
 
 
     // List of Tasks
-    $scope.openTask = function(id) {
+    $scope.openTask = function(id, task) {
       console.log("clicked");
       if ($scope.tasks[id].open == true) {
         $scope.tasks[id].open = false; 
       } else {
         $scope.tasks[id].open = true;
       }
+
+      if ($scope.tasks[id].open == true) {
+       console.log(task);
+        
+        console.log("Activating class");
+
+        var currentStudentId = ref.getAuth().uid;
+        var currentTasksRef = dbRef.child(task.$id);
+        var participantsRef = currentTasksRef.child("participants");
+        console.log(participantsRef.toString());
+        var participants = $firebaseArray(participantsRef); 
+        $scope.participants = [];
+
+        participants.$loaded()
+        .then(function () {
+          var ids = [];
+          for(var i = 0; i < participants.length; i++) {
+            var key = participants.$keyAt(i);
+            var record = participants.$getRecord(key);
+            var participantId = record.$value;
+            ids.push(participantId);
+            console.log(participants);
+
+            var userRef = ref.child("users").child(participantId);
+            
+            userRef.on("value", function (snap) {
+              $scope.participants.push(snap.val());
+              console.log(snap.val().firstName);
+            });
+
+          }
+
+        });
+      }
+
     };
 
-    $scope.apply = function(id) {
 
+    $scope.apply = function(task) {
+
+      console.log("apply");
+      
       var currentStudentId = ref.getAuth().uid;
-      var currentClassId = $scope.activeClass.id;
-      var currentClassRef = dbRef.child(currentClassId);
-      $scope.participants = $firebaseArray(currentClassRef.child("participants"));
+
+      var currentTaskId = task.$id;
+      var currentTaskRef = dbRef.child(currentTaskId);
+      $scope.participants = $firebaseArray(currentTaskRef.child("participants"));
 
       $scope.participants.$add(currentStudentId).then(function(ref){
         console.log("Added student:", currentStudentId);
       });
-    
+      
     }
 
 });
