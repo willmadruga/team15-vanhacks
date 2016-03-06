@@ -14,6 +14,11 @@ angular.module('app',
     .controller('MainCtrl', function($scope, $rootScope, $location) {
         var dbRef = new Firebase("https://knackio.firebaseio.com"); 
 
+        $rootScope.getCurrentUser = function () {
+            // TODO
+            return 'Earner';
+        }
+
         $rootScope.isLoggedIn = function() {
             return dbRef.getAuth() != null;
         }
