@@ -14,7 +14,15 @@ angular.module('app.profile', ['ngRoute', 'firebase'])
 
 	var ref = new Firebase("https://knackio.firebaseio.com/users");
 
-	console.log('profile>>> ' + ref.getAuth());
+	var authData = ref.getAuth();
+	console.log('querying profile data for user > ' + authData.uid);
 	
+	ref.orderByKey().on("child_added", function(snapshot) {
+  		console.log(snapshot.key());
+	});
+
+	$scope.profileData = {
+
+	}
 
 });
