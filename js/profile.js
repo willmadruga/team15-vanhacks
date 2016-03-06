@@ -1,4 +1,4 @@
-angular.module('app.profile', ['ngRoute'])
+angular.module('app.profile', ['ngRoute', 'firebase'])
 
 .config(['$routeProvider', function($routeProvider) {
   
@@ -9,6 +9,12 @@ angular.module('app.profile', ['ngRoute'])
   
 }])
 
-.controller('ProfileCtrl', function() {
+.controller('ProfileCtrl', function($scope) {
 	console.log('profile controller.');
+
+	var ref = new Firebase("https://knackio.firebaseio.com/users");
+
+	console.log('profile>>> ' + ref.getAuth());
+	
+
 });
