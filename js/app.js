@@ -9,6 +9,23 @@ angular.module('app',
             when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'}).
             otherwise({redirectTo: '/home'});
     })
+    .controller('MainCtrl', function($scope) {
+        var dbRef = new Firebase("https://knackio.firebaseio.com"); 
+
+        $scope.getCurrentUser = function() {
+            // TODO
+            return "Earner";
+        }
+
+        $scope.isLoggedIn = function() {
+            return dbRef.getAuth() != null;
+        }
+
+        $scope.logoutUser = function() {
+          console.log("Logging out")
+          dbRef.unauth();
+        }
+    })
     .controller('HomeCtrl', function ($rootScope, $scope, StateService) {
 
         if ($rootScope.loggedIn = null) {
