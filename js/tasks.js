@@ -1,4 +1,4 @@
-angular.module('app.signUp', ['ngRoute', 'firebase', 'ngDialog'])
+angular.module('app.signUp', ['ngRoute', 'firebase'])
 
 .config(['$routeProvider', function($routeProvider) {
   
@@ -10,7 +10,7 @@ angular.module('app.signUp', ['ngRoute', 'firebase', 'ngDialog'])
 }])
 
 
-.controller('TasksCtrl', function($scope, ngDialog, $firebaseArray) {
+.controller('TasksCtrl', function($scope, $firebaseArray) {
 		console.log("tasks");
 
     var dbRef = new Firebase("https://knackio.firebaseio.com/tasks");
