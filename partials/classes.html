@@ -4,6 +4,7 @@
 <div class="container">
 
 <h1>Classes</h1>
+
 <form ng-submit="addClass(classData)" class="form-horizontal">
 
 	<div class="form-group">
@@ -109,31 +110,112 @@
 </form>
 
 <!--<button ng-click="populateBadges()">Populate badges</button>-->
+<div class="panel-group" id="accordion">
+	  <div class="panel panel-default" ng-repeat="class in classes">
+	  	<div class="panel-heading">
+	    <a  ng-click="activateClass(class, $index)">
+	    <span class="label label-default label-pill pull-right">{{class.date}}</span>
+	    {{class.title}}
+	    </a>
+	    </div>
+
+	    <div class="panel-body" ng-show="classes[$index].open">
+
+	    <div class="row">
+	    	<div class="col-sm-2">
+<button class="btn btn-success" ng-show="$parent.isLoggedIn() && (canJoinClass() || !currentStudentIsAlreadyEnrolled)" ng-click="joinClass()">Join this class</button>
+			</div>
+		</div>
+
+		<br/>
+	    	<div class="row">
+			        <label class="control-label col-sm-2">Title: </label>
+			        <div class="col-sm-10">
+			        	{{class.title}}
+			    	</div>
+
+			    </div>
+
+			    <div class="row">
+					<label class="control-label col-sm-2">Description: </label>
+			        <div class="col-sm-10">
+			        	{{class.description}}
+			    	</div>
+			    </div>
+
+			    <div class="row">
+					<label class="control-label col-sm-2">Application Deadline: </label>
+			        <div class="col-sm-10">
+			        	{{class.classDate}}
+			    	</div>
+			    </div>
+
+			    <div class="row">
+					<label class="control-label col-sm-2">Earnable Badges: </label>
+			        <div class="col-sm-10">
+			        	<div ng-repeat="badge in class.badges">
+			        	
+					      <span ng-switch="" on="$index % 3">
+
+					        <div class="row" ng-switch-when="0">
+					          <div class="col-sm-4" ng-show="class.badges[$index+0]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{class.badges[$index+0].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						           
+						          </div>		    
+					          </div>
+
+					          <div class="col-sm-4" ng-show="class.badges[$index+1]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{class.badges[$index+1].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						           
+						          </div>		    
+					          </div>
 
 
-<div class="col-md-6">
-	<ul>
-		<li ng-repeat="class in classes | orderBy: 'classDate':true ">
-			
-			<a  ng-click="activateClass(class)"> {{class.title}}</a>
-		</li>
-	</ul>
+					        <div class="col-sm-4" ng-show="class.badges[$index+2]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{class.badges[$index+2].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						            
+						          </div>		    
+					          </div>
+
+					        </div>
+					      </span>
+			    		</div>
+			    	</div>
+
+			    </div>
+
+			    <div class="row">
+<label class="control-label col-sm-2">Participants: </label>
+			    <ul ng-show="getCurrentUser() === 'Earner' && activeClass != null"> 
+			    <div class="col-sm-10">
+			    <ul>
+					<!-- TODO fix it change Earner to agency -->
+					<li ng-repeat="participant in participants">
+						<a  ng-click="goToProfile(participant)"> {{participant.firstName}} {{participant.lastName}} </a>
+					</li>
+				</ul>
+
+			    </div>
+	    </div>
+
+	  </div>
 </div>
 
 
 <div class="col-md-6" ng-show="activeClass != null">
-	{{activeClass.title}}
-	<br>
-	{{activeClass.description}}
-	<br>
-	{{activeClass.classDate}}
-	<br>
-	{{activeClass.classTime}}
-	<br>
-	{{activeClass.classDateTime}}
-	<button ng-show="$parent.isLoggedIn() && (canJoinClass() || !currentStudentIsAlreadyEnrolled)" ng-click="joinClass()">Join this class</button>
 
-	<ul ng-show="$parent.getCurrentUser() === 'Earner' && activeClass != null"> 
+	
+
+	<ul ng-show="getCurrentUser() === 'Earner' && activeClass != null"> 
 		<!-- TODO fix it change Earner to agency -->
 		<li ng-repeat="participant in participants">
 			<a  ng-click="goToProfile(participant)"> {{participant.firstName}} {{participant.lastName}} </a>

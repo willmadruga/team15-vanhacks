@@ -114,7 +114,13 @@ angular.module('app.classes', ['ngRoute', 'firebase'])
 
   }
 
-  $scope.activateClass = function(classObject) {
+  $scope.activateClass = function(classObject, id) {
+    if ($scope.classes[id].open == true) {
+        $scope.classes[id].open = false; 
+      } else {
+        $scope.classes[id].open = true;
+      }
+
     console.log(classObject);
     $scope.activeClass = classObject;
     console.log("Activating class");
