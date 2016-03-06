@@ -17,12 +17,24 @@ angular.module('app.profile', ['ngRoute', 'firebase'])
 	var authData = ref.getAuth();
 	console.log('querying profile data for user > ' + authData.uid);
 	
-	ref.orderByKey().on("child_added", function(snapshot) {
-  		console.log(snapshot.key());
+	var userRef = new Firebase("https://knackio.firebaseio.com/users/" + authData.uid);
+	
+	userRef.once("value", function(snapshot) {
+		$scope.profile = {
+			username : snapshot.val().username,
+			firstName : snapshot.val().firstName,
+			lastName : snapshot.val().lastName
+		};
+		console.log($scope.profile);
+		$scope.$apply();
 	});
 
-	$scope.profileData = {
-
+	$scope.edit = function(v) {
+		if (v===0) {
+			$scope.isEditing = false; 
+		} else {
+			$scope.isEditing = true; 
+		}
 	}
 
 });
