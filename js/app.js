@@ -3,6 +3,7 @@ angular.module('app',
      'app.signIn',
      'app.signUp',
      'app.resetpwd',
+     'app.classes',
      'app.profile'])
     .config(function ($routeProvider) {
         $routeProvider.

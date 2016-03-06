@@ -36,6 +36,7 @@
             <li><a href="#">Home</a></li>
             <li ng-hide="isLoggedIn()"><a href="#/signin">Sign In</a></li>
             <li><a href="#/profile">Profile</a></li>
+            <li ng-show="isLoggedIn() && getCurrentUser() === 'Earner'"><a href="#/classes">Classes</a></li>
           </ul>
         </div>
       </div>
@@ -54,6 +55,7 @@
     <script type="text/javascript" src="js/resetpwd.js"></script>
     <script type="text/javascript" src="js/signup.js"></script>
     <script type="text/javascript" src="js/profile.js"></script>
+    <script type="text/javascript" src="js/classes.js"></script>
   </body>
 </html>
 

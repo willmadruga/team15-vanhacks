@@ -1,0 +1,64 @@
+<br>
+<br>
+<br>
+<br>
+<form ng-submit="addClass(classData)">
+	<label for="title">Title</label>
+	<input id="title" ng-model="classData.title" placeholder="Title for your class" required autofocus>
+
+	<label for="description">Description</label>
+	<input id="description" type="text" ng-model="classData.description" placeholder"Description of your class" required>
+
+	<label for="date">Date</label>
+	<input id="date" type="date" ng-model="classData.classDate" placeholder="Date" required>
+
+	<label for="time">Time</label>
+	<input id="time" type="time" ng-model="classData.classTime" placeholder="Time" required>
+
+	<label for="classDateTime">Time</label>
+	<input id="classDateTime" type="datetime-local" ng-model="classData.classDateTime" placeholder="Time" required>
+	<button>submit</button>
+<!-- 
+	<label></label>
+	<input></input>
+
+	<label></label>
+	<input></input>
+ -->
+
+</form>
+
+<button ng-click="populateBadges()">Populate badges</button>
+
+
+<div class="col-md-6">
+	<ul>
+		<li ng-repeat="class in classes | orderBy: 'classDate':true ">
+			
+		<a  ng-click="activateClass(class)"> {{class.title}}</a>
+		</li>
+	</ul>
+</div>
+
+
+<div class="col-md-6" ng-show="activeClass != null">
+	{{activeClass.title}}
+	<br>
+	{{activeClass.description}}
+	<br>
+	{{activeClass.classDate}}
+	<br>
+	{{activeClass.classTime}}
+	<br>
+	{{activeClass.classDateTime}}
+	<button ng-show="activeClass != null && canJoinClass()" ng-click="joinClass()">Join this class</button>
+
+	<ul ng-show="$parent.getCurrentUser() === 'Earner' && activeClass != null"> 
+		<!-- TODO fix it change Earner to agency -->
+		<li ng-repeat="student in students">
+			<a  ng-click="goToProfile(class)"> {{student.username}} </a>
+		</li>
+	</ul>
+
+</div>
+
