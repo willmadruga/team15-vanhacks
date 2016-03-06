@@ -8,33 +8,36 @@
         {{message}}
       </div>
 
-      	<div>
-			<div class="col-md-4">
-				<img src="images/photo_placeholder.jpg" width="200" height="200" />
+		<div class="panel panel-default">
+	      	<div>
+				<div class="col-md-4">
+					<img src="images/photo_placeholder.jpg" width="200" height="200" />
+				</div>
+
+				<div class="col-md-6" ng-model="profile">
+					<h2 class="form-profile-heading">
+				  		{{profile.firstName}} {{profile.lastName}}
+					</h2>
+			  		( {{profile.email}} )
+				</div>
+
 			</div>
-		</div>
 
       	<!-- Show only -->
-      	<div class="col-md-1 col-md-offset-6">
-      		<button class="btn btn-lg btn-primary btn-block" ng-click="edit(1)">Edit</button>
-      	</div>
+      	
+  			<div class="panel-body" ng-hide="isEditing()">
+		    	<div class="col-md-1 col-md-offset-6">
+		      		<button class="btn btn-lg btn-primary btn-block" ng-click="editProfile()">Edit</button>
+		      	</div>
+  			</div>
+		</div>
 
-		<div class="col-md-6" ng-hide="isEditing()" ng-model="profile">
-			  <h2 class="form-profile-heading">
-			  	{{profile.firstName}} {{profile.lastName}}
-			  </h2>
-
-			  
-
-
-		</div>	
-
-		<!-- Editing -->
+		<!-- Editing only -->
 
 		<div class="col-md-6" ng-show="isEditing()">
 			
 			<div class="col-md-1 col-md-offset-3">
-      			<button class="btn btn-lg btn-primary btn-block" ng-click="edit(0)">Cancel</button>
+      			<button class="btn btn-lg btn-primary btn-block" ng-click="editProfile()">Cancel</button>
       		</div>
 
 			<form class="form-profile">

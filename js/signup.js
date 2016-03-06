@@ -44,7 +44,7 @@ var dbRef = new Firebase("https://knackio.firebaseio.com");
               
               var userRef = dbRef.child("users").child(userData.uid);
                 userRef.set({
-                    username: createUserData.email,
+                    email: createUserData.email,
                     profile: createUserData.profile
                 });
 

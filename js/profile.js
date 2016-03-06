@@ -21,7 +21,7 @@ angular.module('app.profile', ['ngRoute', 'firebase'])
 	
 	userRef.once("value", function(snapshot) {
 		$scope.profile = {
-			username : snapshot.val().username,
+			email : snapshot.val().email,
 			firstName : snapshot.val().firstName,
 			lastName : snapshot.val().lastName
 		};
@@ -29,12 +29,9 @@ angular.module('app.profile', ['ngRoute', 'firebase'])
 		$scope.$apply();
 	});
 
-	$scope.edit = function(v) {
-		if (v===0) {
-			$scope.isEditing = false; 
-		} else {
-			$scope.isEditing = true; 
-		}
+	$scope.editProfile = function() {
+		console.log('Edit mode is: ' + $scope.isEditing);
+		$scope.isEditing = !$scope.isEditing; 
 	}
 
 });
