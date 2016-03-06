@@ -44,7 +44,7 @@
           <ul class="nav navbar-nav">
             <li><a href="#">Home</a></li>
             <li ng-hide="isLoggedIn()"><a href="#/signin">Sign In</a></li>
-            <li><a href="#/profile">Profile</a></li>
+            <li ng-show="isLoggedIn()"><a href="#/profile">Profile</a></li>
           </ul>
         </div>
       </div>
