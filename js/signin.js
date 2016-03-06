@@ -8,7 +8,7 @@ angular.module('app.signIn', ['ngRoute', 'firebase'])
 	})
   
 }])
-.controller('SignInCtrl', ['$scope', function ($scope) {
+.controller('SignInCtrl', ['$scope', '$location', function ($scope, $location) {
 	var dbRef = new Firebase("https://knackio.firebaseio.com");	
 	$scope.loginUser = function(loginUserData) {
 		dbRef.authWithPassword({
@@ -24,7 +24,10 @@ angular.module('app.signIn', ['ngRoute', 'firebase'])
 	  			console.log("Authenticated successfully with payload:", authData);
 	  		}
 	  		$scope.loginUserData = {};
+	  		$location.path('/profile');
+	  		$location.replace();
 	  		$scope.$apply();
+
 		});
 	}
 
