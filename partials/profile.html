@@ -25,11 +25,16 @@
 
       	<!-- Show only -->
       	
-  			<div class="panel-body" ng-hide="isEditing()">
-		    	<div class="col-md-1 col-md-offset-6">
-		      		<button class="btn btn-lg btn-primary btn-block" ng-click="editProfile()">Edit</button>
-		      	</div>
+  		<div class="panel-body" ng-hide="isEditing()">
+		   	<div class="col-md-1 col-md-offset-6">
+		   		<button class="btn btn-lg btn-primary btn-block" ng-click="editProfile()">Edit</button>
   			</div>
+		</div>
+
+		<div class="col-md-6" ng-hide="isEditing() || getCurrentUser() !== 'Earner'">
+			<div ng-repeat="b in profile.badges">
+				<img ng-src="images/{{b.filename}}" alt="badge" class="img-responsive center-block" />
+			</div>
 		</div>
 
 		<!-- Editing only -->

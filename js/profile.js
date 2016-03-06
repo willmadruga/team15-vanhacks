@@ -10,28 +10,33 @@ angular.module('app.profile', ['ngRoute', 'firebase'])
 }])
 
 .controller('ProfileCtrl', function($scope) {
-	console.log('profile controller.');
 
-	var ref = new Firebase("https://knackio.firebaseio.com/users");
+	$scope.editProfile = function() {
+		
+		if ($scope.isEditing == undefined) {
+			$scope.isEditing = false;
+		}
 
-	var authData = ref.getAuth();
-	console.log('querying profile data for user > ' + authData.uid);
+		$scope.isEditing = !$scope.isEditing;
+		console.log('Edit mode is: ' + $scope.isEditing);	
+	}
+
+	if ($scope.profile == undefined) {
+		console.log('loading profile');
+		loadProfile($scope);	
+	}
 	
-	var userRef = new Firebase("https://knackio.firebaseio.com/users/" + authData.uid);
+});
+
+var loadProfile = function($scope) {
+	var baseUrl = "https://knackio.firebaseio.com/users/";
+	var ref = new Firebase(baseUrl);
+	var authData = ref.getAuth();
+	var userRef = new Firebase(baseUrl + authData.uid);
 	
 	userRef.once("value", function(snapshot) {
-		$scope.profile = {
-			email : snapshot.val().email,
-			firstName : snapshot.val().firstName,
-			lastName : snapshot.val().lastName
-		};
+		$scope.profile = snapshot.val();
 		console.log($scope.profile);
 		$scope.$apply();
 	});
-
-	$scope.editProfile = function() {
-		console.log('Edit mode is: ' + $scope.isEditing);
-		$scope.isEditing = !$scope.isEditing; 
-	}
-
-});
+}

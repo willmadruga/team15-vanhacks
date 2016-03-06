@@ -8,8 +8,22 @@ angular.module('app.signIn', ['ngRoute', 'firebase'])
 	})
   
 }])
-.controller('SignInCtrl', ['$scope', '$location', function ($scope, $location) {
-	var dbRef = new Firebase("https://knackio.firebaseio.com");	
+.controller('SignInCtrl', ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
+	
+	var baseUrl = "https://knackio.firebaseio.com/";
+	var dbRef = new Firebase(baseUrl);
+	
+	var loadCurrentUserProfile = function() {
+        console.log('hello current user');
+        var authData = dbRef.getAuth();
+        var usersDb = new Firebase(baseUrl + "users/" + authData.uid);
+        
+        usersDb.once("value", function(snapshot) {
+        	$rootScope.getCurrentUser = snapshot.val().profile;
+        	console.log("Current user 1: ", $rootScope.getCurrentUser);
+        });
+    }
+
 	$scope.loginUser = function(loginUserData) {
 		dbRef.authWithPassword({
 			email    : loginUserData.email,
@@ -24,10 +38,10 @@ angular.module('app.signIn', ['ngRoute', 'firebase'])
 	  			console.log("Authenticated successfully with payload:", authData);
 	  		}
 	  		$scope.loginUserData = {};
+	  		loadCurrentUserProfile();
 	  		$location.path('/profile');
 	  		$location.replace();
 	  		$scope.$apply();
-
 		});
 	}
 
