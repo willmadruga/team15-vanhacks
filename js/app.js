@@ -19,6 +19,10 @@ angular.module('app',
             return 'Earner';
         }
 
+        $rootScope.canSeeClasses = function() {
+            return $rootScope.getCurrentUser() === 'Earner' || $rootScope.getCurrentUser() === 'Agency';
+        }
+
         $rootScope.isLoggedIn = function() {
             return dbRef.getAuth() != null;
         }
