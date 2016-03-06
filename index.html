@@ -44,7 +44,8 @@
           <ul class="nav navbar-nav">
             <li><a href="#">Home</a></li>
             <li ng-show="isLoggedIn()"><a href="#/profile">Profile</a></li>
-            <li ng-show="isLoggedIn() && canSeeClasses()"><a href="#/classes">Classes</a></li>
+            <li ng-show="isLoggedIn()"><a href="#/classes">Classes</a></li> <!-- && getCurrentUser === 'Earner' -->
+            <li ng-show="isLoggedIn()"><a href="#/tasks">Tasks</a></li> <!-- && getCurrentUser === 'Agency' -->
           </ul>
           <ul class="nav navbar-nav navbar-right"><li>
             <form class="form-signin" ng-hide="isLoggedIn()">

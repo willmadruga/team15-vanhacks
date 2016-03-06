@@ -51,7 +51,7 @@
 	{{activeClass.classTime}}
 	<br>
 	{{activeClass.classDateTime}}
-	<button ng-show="canJoinClass() || !currentStudentIsAlreadyEnrolled" ng-click="joinClass()">Join this class</button>
+	<button ng-show="$parent.isLoggedIn() && (canJoinClass() || !currentStudentIsAlreadyEnrolled)" ng-click="joinClass()">Join this class</button>
 
 	<ul ng-show="$parent.getCurrentUser() === 'Earner' && activeClass != null"> 
 		<!-- TODO fix it change Earner to agency -->
