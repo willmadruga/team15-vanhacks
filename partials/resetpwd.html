@@ -1,0 +1,19 @@
+a<form class="form-signin" ng-submit="resetPassword(resetPasswordData)" ng-show="!doneResettingPassword">
+    <h2 class="form-signin-heading">Please reset your password</h2>
+
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input ng-model="resetPasswordData.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+    <label for="inputPassword" class="sr-only">Old password</label>
+    <input ng-model="resetPasswordData.oldPassword" type="password" id="inputPassword" class="form-control" placeholder="Old password" required>
+
+    <label for="inputPassword" class="sr-only">New password</label>
+    <input ng-model="resetPasswordData.newPassword1" type="password" id="inputPassword" class="form-control" placeholder="New password" required>
+    
+    <label for="inputPassword" class="sr-only">New password</label>
+    <input ng-model="resetPasswordData.newPassword2" type="password" id="inputPassword" class="form-control" placeholder="New password" required>
+    
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Change password</button>
+
+</form>
+<p ng-show="doneResettingPassword">{{resetPasswordMessage}}>

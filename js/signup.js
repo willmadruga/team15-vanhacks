@@ -42,6 +42,12 @@ var dbRef = new Firebase("https://knackio.firebaseio.com");
               $scope.alertMessage = "";
               $scope.message = "Successfully created user";
               
+              var userRef = dbRef.child("users").child(userData.uid);
+                userRef.set({
+                    username: createUserData.email,
+                    profile: createUserData.profile
+                });
+
               console.log("done loading - success");
             }
 
