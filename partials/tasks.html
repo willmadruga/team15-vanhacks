@@ -1,0 +1,64 @@
+<div class="container">
+
+<h1>Available Tasks <a href="" ng-click="clickToAdd()" ng-disabled="canAdd != true"><i class="fa fa-plus-square text-right"></i></a></h1> 
+
+
+	<div ng-if="addingNewTask == true">
+
+		<form action="" method="post" class="">
+		    <h1>Create a new task
+		 
+		    </h1>
+		    <label>
+		        <span>Title: </span>
+		        <input id="title" type="text" name="title" placeholder="Title" ng-model="newTaskData.title"/>
+		    </label>
+		    <label>
+		        <span>Description: </span>
+		        <input id="description" type="textarea" name="description" placeholder="Description" ng-model="newTaskData.description"/>
+		    </label>
+		    <label>
+		        <span>Date: </span>
+		        <input id="description" type="date" name="date" placeholder="date" ng-model="newTaskData.date"/>
+		    </label>
+		   	
+		    <label>
+		        <span>Select Badges :</span>
+		    </label> 
+		       	<div ng-repeat="badge in badges">
+			      <span ng-switch="" on="$index % 3">
+
+			        <div class="row" ng-switch-when="0">
+			          <div class="col-sm-4" ng-show="badges[$index+0]">
+			          	<div class="well"><img width="200px" height="200px" src="{{badges[$index+0].url}}">
+			          	</div>
+			          	<input name="{{badges[$index+0].name}}" type="number" ng-model="badges[$index+0].quantity">
+			          </div>
+
+			          <div class="col-sm-4" ng-show="badges[$index+1]">
+			          	<div class="well"><img width="200px" height="200px" src="{{badges[$index+1].url}}"></div>
+			          	<input name="{{badges[$index+1].name}}" type="number" ng-model="badges[$index+1].quantity">
+			          </div>
+
+			          <div class="col-sm-4" ng-show="badges[$index+2]"><div class="well"><img width="200px" height="200px" src="{{badges[$index+2].url}}"></div>
+			          <input name="{{badges[$index+2].name}}" type="number" ng-model="badges[$index+2].quantity">
+			        </div>
+			        </div>
+			      </span>
+			    </div>
+
+		       
+		     <label>
+		        <span>&nbsp;</span>
+		         <button class="button" value="Save" ng-click="cancelNewTask()">
+		        	Cancel
+		        </button>
+		        <button class="button" value="Save" ng-click="saveNewTask(newTaskData)">
+		        	Save
+		        </button>
+		    </label>    
+		</form>
+	   
+	</div>
+
+</div>
