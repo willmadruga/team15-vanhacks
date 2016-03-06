@@ -35,7 +35,7 @@
 	<ul>
 		<li ng-repeat="class in classes | orderBy: 'classDate':true ">
 			
-		<a  ng-click="activateClass(class)"> {{class.title}}</a>
+			<a  ng-click="activateClass(class)"> {{class.title}}</a>
 		</li>
 	</ul>
 </div>
@@ -51,12 +51,12 @@
 	{{activeClass.classTime}}
 	<br>
 	{{activeClass.classDateTime}}
-	<button ng-show="activeClass != null && canJoinClass()" ng-click="joinClass()">Join this class</button>
+	<button ng-show="canJoinClass() || !currentStudentIsAlreadyEnrolled" ng-click="joinClass()">Join this class</button>
 
 	<ul ng-show="$parent.getCurrentUser() === 'Earner' && activeClass != null"> 
 		<!-- TODO fix it change Earner to agency -->
-		<li ng-repeat="student in students">
-			<a  ng-click="goToProfile(class)"> {{student.username}} </a>
+		<li ng-repeat="participant in participants">
+			<a  ng-click="goToProfile(participant)"> {{participant.firstName}} {{participant.lastName}} </a>
 		</li>
 	</ul>
 

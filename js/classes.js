@@ -41,27 +41,67 @@ angular.module('app.classes', ['ngRoute', 'firebase'])
   $scope.activateClass = function(classObject) {
     console.log(classObject);
     $scope.activeClass = classObject;
-    console.log("activating class");
-  }
+    console.log("Activating class");
 
-  $scope.canJoinClass = function () {
-    return true;
-    console.log("Checking if a student can join class");
-    if (ref.getAuth() == null) return false;
     var currentStudentId = ref.getAuth().uid;
     var currentClassRef = dbRef.child($scope.activeClass.id);
     var participantsRef = currentClassRef.child("participants");
+    var participants = $firebaseArray(participantsRef); 
+    $scope.participants = [];
 
-    console.log(participantsRef.toString());
+    participants.$loaded()
+      .then(function () {
+        var ids = [];
+        for(var i = 0; i < participants.length; i++) {
+          var key = participants.$keyAt(i);
+          var record = participants.$getRecord(key);
+          var participantId = record.$value;
+          ids.push(participantId);
+
+          var userRef = ref.child("users").child(participantId);
+          console.log("user ref:", userRef.toString());
+          userRef.on("value", function (snap) {
+            $scope.participants.push(snap.val());
+            console.log(snap.val().firstName);
+          });
+
+        }
+      });
+  }
+
+  $scope.canJoinClass = function () {
+    // console.log("Checking if a student can join class");
+    if (ref.getAuth() == null) return false;
+    if ($scope.activeClass == null) return false;
+    var currentStudentId = ref.getAuth().uid;
+    var currentClassRef = dbRef.child($scope.activeClass.id);
+    var participantsRef = currentClassRef.child("participants");
     var participants = $firebaseArray(participantsRef);
-    console.log($firebaseArray(participantsRef));
 
-    console.log(participants.$indexFor(currentStudentId));
-    var currentStudentIsAlreadyEnrolled = true;
+    participants.$loaded()
+      .then(function() {
+        // console.log("Loaded participants:", participants);
+        $scope.currentStudentIsAlreadyEnrolled = false;
+        for(var i = 0; i < participants.length; i++) {
+          var key = participants.$keyAt(i);
+          var record = participants.$getRecord(key);
+          var participantId = record.$value;
+          if (participantId === currentStudentId) {
+            $scope.currentStudentIsAlreadyEnrolled = true;
+            // console.log("Current student already joined the workshop:", $scope.currentStudentIsAlreadyEnrolled);
+          }
+        }
+    });
 
-    return $scope.$parent.getCurrentUser() === 'Earner' &&
+    var canJoinClass = $scope.$parent.getCurrentUser() === 'Earner' &&
         $scope.activeClass != null &&
-        !currentStudentIsAlreadyEnrolled;
+        !$scope.currentStudentIsAlreadyEnrolled;
+    return canJoinClass;
+  }
+
+  $scope.goToProfile = function (argument) {
+    // body...
+    console.log("going to students profile");
   }
   
   $scope.joinClass = function () {
@@ -70,7 +110,7 @@ angular.module('app.classes', ['ngRoute', 'firebase'])
     var currentClassRef = dbRef.child(currentClassId);
     $scope.participants = $firebaseArray(currentClassRef.child("participants"));
 
-    $scope.participants.$add({id:currentStudentId}).then(function(ref){
+    $scope.participants.$add(currentStudentId).then(function(ref){
       console.log("Added student:", currentStudentId);
     });
   } 
