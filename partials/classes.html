@@ -1,23 +1,103 @@
 <br>
 <br>
 <br>
-<br>
-<form ng-submit="addClass(classData)">
-	<label for="title">Title</label>
-	<input id="title" ng-model="classData.title" placeholder="Title for your class" required autofocus>
+<div class="container">
 
-	<label for="description">Description</label>
-	<input id="description" type="text" ng-model="classData.description" placeholder"Description of your class" required>
+<h1>Classes</h1>
+<form ng-submit="addClass(classData)" class="form-horizontal">
 
-	<label for="date">Date</label>
-	<input id="date" type="date" ng-model="classData.classDate" placeholder="Date" required>
+	<div class="form-group">
+	<label class="control-label col-sm-2" for="title">Title</label>
+	<div class="col-sm-10">
+		<input id="title" class="form-control" ng-model="classData.title" placeholder="Title for your class" required autofocus>
+	</div>
+	</div>
 
-	<label for="time">Time</label>
-	<input id="time" type="time" ng-model="classData.classTime" placeholder="Time" required>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="description">Description</label>
+		<div class="col-sm-10">
+		<input id="description" class="form-control" type="text" ng-model="classData.description" placeholder"Description of your class" required>
+		</div>
+	</div>
 
-	<label for="classDateTime">Time</label>
-	<input id="classDateTime" type="datetime-local" ng-model="classData.classDateTime" placeholder="Time" required>
-	<button>submit</button>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="date">Date</label>
+		<div class="col-sm-5">
+		<input id="date" class="form-control" type="date" ng-model="classData.classDate" placeholder="Date" required>
+		</div>
+
+		<div class="col-sm-5">
+			<input id="time" class="form-control" type="time" ng-model="classData.classTime" placeholder="Time" required>
+		</div>
+	</div>
+
+	<div class="form-group">
+			    
+			        <label class="control-label col-sm-2">Select Badges: </label>
+			        <div class="col-sm-10">
+			       	
+			       		<div ng-repeat="badge in badges">
+					      <span ng-switch="" on="$index % 3">
+
+					        <div class="row" ng-switch-when="0">
+					          <div class="col-sm-4" ng-show="badges[$index+0]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{badges[$index+0].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						            <div class="panel-footer">
+						            	
+						             	<input name="{{badges[$index+0].name}}" type="number" min="0" ng-model="badges[$index+0].quantity" class="form-control">
+						            
+						            </div>
+						          </div>		    
+					          </div>
+
+					          <div class="col-sm-4" ng-show="badges[$index+1]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{badges[$index+1].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						            <div class="panel-footer">
+						            	
+						             	<input name="{{badges[$index+1].name}}" type="number" min="0" ng-model="badges[$index+1].quantity" class="form-control">
+						            
+						            </div>
+						          </div>		    
+					          </div>
+
+
+					        <div class="col-sm-4" ng-show="badges[$index+2]">
+					          	 <div class="panel panel-default my_panel">
+						            <div class="panel-body">
+						              <img ng-src="{{badges[$index+2].url}}" alt="" class="img-responsive center-block" />
+						            </div>
+						            <div class="panel-footer">
+						            	
+						             	<input name="{{badges[$index+2].name}}" type="number" min="0" ng-model="badges[$index+2].quantity" class="form-control">
+						            
+						            </div>
+						          </div>		    
+					          </div>
+
+					        </div>
+					      </span>
+			    		</div>
+
+			       	</div>
+
+
+		    	</div>
+
+		    	<div class="form-group">
+			    
+			        <label class="control-label col-sm-2"> </label>
+			       
+			    	<div class="col-sm-5">
+			        	<button class="btn btn-primary">submit</button>
+			    	</div>
+		    	</div>
+	
 <!-- 
 	<label></label>
 	<input></input>
@@ -28,7 +108,7 @@
 
 </form>
 
-<button ng-click="populateBadges()">Populate badges</button>
+<!--<button ng-click="populateBadges()">Populate badges</button>-->
 
 
 <div class="col-md-6">
@@ -61,4 +141,4 @@
 	</ul>
 
 </div>
-
+</div>
