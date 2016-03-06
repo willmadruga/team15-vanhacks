@@ -4,7 +4,7 @@
 <div class="container">
 
 <h1>Classes</h1>
-
+<div ng-if="getCurrentUser() === 'Agency'">
 <form ng-submit="addClass(classData)" class="form-horizontal">
 
 	<div class="form-group">
@@ -108,6 +108,7 @@
  -->
 
 </form>
+</div>
 
 <!--<button ng-click="populateBadges()">Populate badges</button>-->
 <div class="panel-group" id="accordion">
