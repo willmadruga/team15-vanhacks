@@ -10,7 +10,7 @@ angular.module('app.signUp', ['ngRoute', 'firebase'])
 }])
 
 
-.controller('SignUpCtrl', function($scope) {
+.controller('SignUpCtrl', function($scope, $location) {
 		
 	
 var dbRef = new Firebase("https://knackio.firebaseio.com");
@@ -52,7 +52,11 @@ var dbRef = new Firebase("https://knackio.firebaseio.com");
             }
 
             $scope.submitting = false;
+            
+            $location.path('/signin');
+            $location.replace();
             $scope.$apply();
+
           });
 
         } else {
