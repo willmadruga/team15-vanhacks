@@ -37,30 +37,59 @@ angular.module('app.tasks', ['ngRoute', 'firebase'])
         id: "id1",
         name: "badge1",
         description: "Badge 1",
-        url: "images/badge1.jpg",
+        url: "images/Basic-Food-Service.jpg",
         quantity: 0
       },
       {
         id: "id2",
         name: "badge2",
         description: "Badge 2",
-        url: "images/badge2.jpg",
+        url: "images/Cooking-Methods.jpg",
         quantity: 0
       },
       {
         id: "id3",
         name: "badge3",
         description: "Badge 3",
-        url: "images/badge3.jpg",
+        url: "images/Storage.jpg",
         quantity: 0
       },
       {
         id: "id4",
         name: "badge4",
         description: "Badge 4",
-        url: "images/badge4.jpg",
+        url: "images/softskill-badges_computer-literacy.jpg",
         quantity: 0
-      }
+      },
+      {
+        id: "id5",
+        name: "badge5",
+        description: "Badge 5",
+        url: "images/softskill-badges_conflict-resolution.jpg",
+        quantity: 0
+      },      
+      {
+        id: "id6",
+        name: "badge6",
+        description: "Badge 6",
+        url: "images/softskill-badges_teamwork.jpg",
+        quantity: 0
+      },
+      {
+        id: "id7",
+        name: "badge7",
+        description: "Badge 7",
+        url: "images/softskill-badges_time-management.jpg",
+        quantity: 0
+      }, 
+      {
+        id: "id8",
+        name: "badge8",
+        description: "Badge 8",
+        url: "images/softskill-badges_workplace-communication.jpg",
+        quantity: 0
+      },
+
     ];
 
     //$scope.newTaskData.badges = $scope.badges;
