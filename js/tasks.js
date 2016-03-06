@@ -1,4 +1,4 @@
-angular.module('app.tasks', ['ngRoute', 'firebase', 'ui.bootstrap'])
+angular.module('app.tasks', ['ngRoute', 'firebase'])
 
 .config(['$routeProvider', function($routeProvider) {
   
