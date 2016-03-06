@@ -19,15 +19,91 @@ angular.module('app.classes', ['ngRoute', 'firebase'])
   $scope.classes = $firebaseArray(dbRef);
   $scope.activeClass = null;
 
+  $scope.badges = [
+      {
+        id: "id1",
+        name: "badge1",
+        description: "Badge 1",
+        url: "images/Basic-Food-Service.jpg",
+        quantity: 0
+      },
+      {
+        id: "id2",
+        name: "badge2",
+        description: "Badge 2",
+        url: "images/Cooking-Methods.jpg",
+        quantity: 0
+      },
+      {
+        id: "id3",
+        name: "badge3",
+        description: "Badge 3",
+        url: "images/Storage.jpg",
+        quantity: 0
+      },
+      {
+        id: "id4",
+        name: "badge4",
+        description: "Badge 4",
+        url: "images/softskill-badges_computer-literacy.jpg",
+        quantity: 0
+      },
+      {
+        id: "id5",
+        name: "badge5",
+        description: "Badge 5",
+        url: "images/softskill-badges_conflict-resolution.jpg",
+        quantity: 0
+      },      
+      {
+        id: "id6",
+        name: "badge6",
+        description: "Badge 6",
+        url: "images/softskill-badges_teamwork.jpg",
+        quantity: 0
+      },
+      {
+        id: "id7",
+        name: "badge7",
+        description: "Badge 7",
+        url: "images/softskill-badges_time-management.jpg",
+        quantity: 0
+      }, 
+      {
+        id: "id8",
+        name: "badge8",
+        description: "Badge 8",
+        url: "images/softskill-badges_workplace-communication.jpg",
+        quantity: 0
+      },
+
+    ];
+
+
+
   $scope.addClass = function(classData) {
     console.log(classData);
     console.log(classData.classDate);
+
+    badges = [];
+
+     angular.forEach($scope.badges, function(value, key) {
+        console.log(key + ': ' + value);
+        if (value.quantity > 0) {
+          badges.push(value);
+        }
+      });
+
+ // Converting the date and time to string
+      classData.classDate.setHours(classData.classTime.getHours());
+      classData.classDate.setMinutes(classData.classTime.getMinutes());
+      classData.classDate.setSeconds(classData.classTime.getSeconds());
+
     $scope.classes.$add({
       title: classData.title,
       description: classData.description,
       classDate: classData.classDate.toString(),
-      classTime: classData.classTime.toString(),
-      dateTime: classData.classDateTime.toString()
+      badges: badges
     }).then(function(ref) {
         console.log("Added a class");
         var classId = ref.key();
