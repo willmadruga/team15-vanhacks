@@ -1,4 +1,4 @@
-angular.module('app.tasks', ['ngRoute', 'firebase', 'ngDialog'])
+angular.module('app.tasks', ['ngRoute', 'firebase', 'ui.bootstrap'])
 
 .config(['$routeProvider', function($routeProvider) {
   
@@ -7,12 +7,14 @@ angular.module('app.tasks', ['ngRoute', 'firebase', 'ngDialog'])
 		controller: 'TasksCtrl'
 	})
   
+
 }])
 
 
-.controller('TasksCtrl', function($scope, ngDialog, $firebaseArray) {
+.controller('TasksCtrl', function($scope, $firebaseArray) {
 		console.log("tasks");
-
+   
+    var ref = new Firebase("https://knackio.firebaseio.com/");
     var dbRef = new Firebase("https://knackio.firebaseio.com/tasks");
     $scope.tasks = $firebaseArray(dbRef);
 
@@ -102,6 +104,30 @@ angular.module('app.tasks', ['ngRoute', 'firebase', 'ngDialog'])
         $scope.addingNewTask = false;
       });
 
+    }
+
+
+    // List of Tasks
+    $scope.openTask = function(id) {
+      console.log("clicked");
+      if ($scope.tasks[id].open == true) {
+        $scope.tasks[id].open = false; 
+      } else {
+        $scope.tasks[id].open = true;
+      }
+    };
+
+    $scope.apply = function(id) {
+
+      var currentStudentId = ref.getAuth().uid;
+      var currentClassId = $scope.activeClass.id;
+      var currentClassRef = dbRef.child(currentClassId);
+      $scope.participants = $firebaseArray(currentClassRef.child("participants"));
+
+      $scope.participants.$add(currentStudentId).then(function(ref){
+        console.log("Added student:", currentStudentId);
+      });
+    
     }
 
 });
